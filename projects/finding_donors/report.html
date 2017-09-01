@@ -13243,26 +13243,41 @@ $$ F_\beta  = (1+\beta ^2)\cdot \frac{precision \cdot recall}{(\beta^2 \cdot pre
 <li>What makes this model a good candidate for the problem, given what you know about the data?</li>
 </ul>
 <p><strong>Answer:</strong></p>
-<p><em>Ensemble Methods: AdaBoost</em></p>
-<ul>
-<li>Real-world application: The AdaBoost is used in the areas of video and image recognition. A real world example of AdaBoost is object detection in image: Applcication of AdaBoost Algorithm in Basketball Player Detection. <a href="https://www.uni-obuda.hu/journal/Markoski_Ivankovic_Ratgeber_Pecev_Glusac_57.pdf">refernece</a></li>
-<li>Strength: The error rate is low and the code is easy. It classifies with the best classifier, and there is no parameter for adjustment. <a href="https://www.slideshare.net/YonghoonKwon1/07-45214373">reference</a></li>
-<li>Weakness: Sensitive to error data. <a href="https://www.slideshare.net/YonghoonKwon1/07-45214373">reference</a></li>
-<li>Candidacy: AdaBoost is good for this problem because it will be able to take the full dataset and be able to generate a strong learner by analyzing the relationships between the various features and their effect on the probability of income.</li>
-</ul>
 <p><em>SVM (Support Vector Machines) </em></p>
 <ul>
 <li>Real-world application: SVM is applied to image recognition with a very large dimension space (considering the value of each pixel of the image as an attribute). The learning data is a group of instances that is a labeled human face image and learns a model that predicts the label of a new instance that has not been seen.</li>
 <li>Strength: It is very efficient when the space to learn is high-dimensional property space. It is also efficient from the viewpoint of memory space.</li>
-<li>Weakness: There is a limit to the number of data that is not affected by time only for linear classification.</li>
-<li>Candidacy: This model can still be a good candidate as there seems to be some features in the data that can more clearly define the income level boundary.</li>
+<li>Weakness: It does not work well with large datasets.</li>
+<li>Reason:<ul>
+<li>the dataset has more than 50 samples and less than 100k samples</li>
+<li>SVM's effectiveness given high-dimensionality<ul>
+<li>the dataset includes 103 features after one-hot encoding.</li>
 </ul>
-<p><em>Decision Trees</em></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><em><a href="https://en.wikipedia.org/wiki/Decision_tree#Association_rule_induction">Decision Trees</a></em></p>
 <ul>
-<li>Real-world application: Fire Probability Prediction Based on Weather Information Using Decision Tree<a href="http://www.dbpia.co.kr/Journal/ArticleDetail/NODE02283313">reference</a></li>
+<li>Real-world application: Fire Probability Prediction Based on Weather Information Using Decision Tree <a href="http://www.dbpia.co.kr/Journal/ArticleDetail/NODE02283313">reference</a></li>
 <li>Strength: It is very useful for data mining applications because it has the advantage of being able to easily understand and explain the results and to use it directly in decision making. </li>
 <li>Weakness: When the characteristics of the data can not be divided vertically / horizontally into specific variables, the classification rate is lowered and the tree becomes complicated. Decision trees do not guarantee optimal solutions for using the greedy approach.</li>
-<li>Candidacy: For this data set the decision tree model performs well because there is a large and clean dataset of binary labels.</li>
+<li>Reason: <ul>
+<li>Decision Trees are simple to understand and interpret.</li>
+<li>Use a <a href="https://en.wikipedia.org/wiki/White_box_(software_engineering)">white box</a> model.<ul>
+<li>If the given situation in the model is observable, we can easily explain the condition using the boolean logic. </li>
+</ul>
+</li>
+<li>It can be applied to both numerical and categorical data. However, we unified the types of features in the preprocessing step.</li>
+</ul>
+</li>
+</ul>
+<p><em>Ensemble Methods: <a href="https://ko.wikipedia.org/wiki/%EC%97%90%EC%9D%B4%EB%8B%A4%EB%B6%80%EC%8A%A4%ED%8A%B8">AdaBoost</a></em></p>
+<ul>
+<li>Real-world application: A classic use case where AdaBoost algorithms is in the problem of Face Detection. It is also used in the areas of video and image recognition. A real world example of AdaBoost is object detection in image: Applcication of AdaBoost Algorithm in Basketball Player Detection. <a href="https://www.uni-obuda.hu/journal/Markoski_Ivankovic_Ratgeber_Pecev_Glusac_57.pdf">refernece</a></li>
+<li>Strength: The error rate is low and the code is easy. It classifies with the best classifier, and there is no parameter for adjustment. <a href="https://www.slideshare.net/YonghoonKwon1/07-45214373">reference</a></li>
+<li>Weakness: Sensitive to error data. <a href="https://www.slideshare.net/YonghoonKwon1/07-45214373">reference</a></li>
+<li>Reason: The AdaBoost training only selects features that are thought to improve the predictive power of the model. This potentially improves performance time by reducing the number of dimensions and not considering unnecessary features.</li>
 </ul>
 
 </div>
@@ -14227,22 +14242,17 @@ AABJRU5ErkJggg==
 <li><p>1 ~ 2 단락에서 CharityML에게 평신도의 용어로 선택한 최종 모델이 어떻게 작동해야하는지 설명하십시오. 모델을 훈련하는 방법 및 모델이 예측하는 방법과 같이 모델의 주요 특성을 설명해야합니다. 방정식 설명과 같은 고급 수학 전문 용어를 사용하지 마십시오.</p>
 </li>
 </ul>
-<p><strong>Answer:</strong></p>
-
-<pre><code>1. Collect: All the way
-2. Preparation: It depends on the type of weak learner we use. Use decision-making stumps to process all types of data.
-3. Analysis: All the way
-4. Training: Most of the time consumed at this stage. The classifier trains weak learners several times with the same data set.
-    - Trained as a weak classifier to extract incorrectly classified cases and correctly classified cases
-    - Correctly categorized examples will lower the weight and raise the weight if it is misclassified.
-    - After the weight vector D is calculated, it is repeated AdaBoost.
-    - Adjust the training and the weight until the error reaches zeor or the number of weak classifiers reaches a maximum.
-5. Inspection: Error rate calculation
-6. Like SVM, AdaBoost also predicts one of the classification items (SVM should be used when there are more than two classification items).
-
-
-
-</code></pre>
+<p><strong>Answer:</strong> 
+Adaboost works by combining several weak learners(base learners; D1, D2, D3), to create an ensemble of learners that can predict whether an individual earns above 50k or not.</p>
+<ol>
+<li>Three plus(+) misclassified in D1 are given higher weights(pay higher attention).</li>
+<li>Three minus(-) which is misclassified in D2 are given higher weights.</li>
+<li>A horizontal line is generated to classify plus(+) and minus(-) based on higher weight of misclassified observation.</li>
+<li>Combined D1, D2 and D3 to form a strong prediction.</li>
+</ol>
+<p>Finally, it combines the outputs from weak learner and creates a strong learner which eventually improves the prediction power of the model. Boosting pays higher focus on examples which are mis-classiﬁed or have higher errors by preceding weak rules.
+<a href="https://www.analyticsvidhya.com/blog/2015/11/quick-introduction-boosting-algorithms-machine-learning/">reference</a></p>
+<p><img src="https://www.analyticsvidhya.com/wp-content/uploads/2015/11/bigd.png" alt="alt text" title="AdaBoost Diagram"></p>
 <h3 id="Implementation:-Model-Tuning">Implementation: Model Tuning<a class="anchor-link" href="#Implementation:-Model-Tuning">&#194;&#182;</a></h3><p>Fine tune the chosen model. Use grid search (<code>GridSearchCV</code>) with at least one important parameter tuned with at least 3 different values. You will need to use the entire training set for this. In the code cell below, you will need to implement the following:</p>
 <ul>
 <li>Import <a href="http://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html">sklearn.grid_search.GridSearchCV</a> and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html">sklearn.metrics.make_scorer</a>.</li>
@@ -14782,7 +14792,6 @@ RU5ErkJggg==
 </ul>
 <p><strong>Answer:</strong></p>
 <ul>
-<li>다섯 가지 중에 두 가지를 제외하고 다 맞추었다. 아쉬운 것은 가장 중요한 feature으로 education을 골랐는데 위의 결과를 보니까 education-num 이었다. 연속적인 feature라는 것을 눈치채지 못하였다. 그리고 내가 예상한 occupation feature는 위의 그래프에 나타나지 않았다. 다행인 것은 hours-per-week과 age에 대한 순위는 어느정도 똑같다는 것이다. 그렇지만 <strong>Question 6</strong>의 대답에서는 capital-gain만을 제시하였다.</li>
 <li>Out of the five, two were met. Unfortunately, I chose 'education' as the most important feature. I did not notice that 'education-num' was a continuous feature. And the 'occupation' feature I expected was not shown in the above graph. Fortunately, the rankings for 'hours-per-week' and 'age' are same with this visulaization. However, in the answer to <strong>Question 6</strong>, only capital-gain is presented.</li>
 <li>The above graph shows that I agree with the idea that there is a high possibility to classify income levels according to 'hours-per-week', 'age', and 'education-num'.</li>
 <li>'capital-gain' and 'capital-loss' have more predictive power than occupation, because the capital features are completely numeric data column whereas 'occupation' is not.</li>
@@ -14865,14 +14874,13 @@ F-score on testing data: 0.6752
 </ul>
 <p><strong>Answer:</strong></p>
 <ul>
-<li>최적화된 전체 데이터 모델보다 모델 수행이 악화되었다. 주목할 가치가 있는 점은 기본 개매 변수가 있는 최적화 되지 않은 모델의 성능이 조금 향상되었다는 것이다.<ul>
+<li>Model performance worsened over the optimized whole data model. What is noteworthy is that the performance of the unoptimized models with basic parameters has improved slightly.<ul>
 <li>The accuracy (full data): 0.35% higher</li>
 <li>The F-score (full data): 0.96% higher</li>
 <li>The accuracy (reduced data): 3.26% lower</li>
 <li>The F-score (reduced data): 7.7% lower</li>
 </ul>
 </li>
-<li>감소된 데이터는 성능이 악화되기 때문에 전체 데이터 모델을 트레이닝 세트로 사용할 것이다. 훈련 시간을 고려하더라도, 최적화되지 않은 모델은 상대적으로 빠르며, 전체 데이터 세트에 대한 훈련 및 예측은 1 초 미만입니다.</li>
 <li>Reduced data will use the entire data model as a training set because performance will deteriorate. Even though training time is taken into account, non-optimized models are relatively fast, and training and predicting for the entire data set is less than a second.</li>
 </ul>
 
