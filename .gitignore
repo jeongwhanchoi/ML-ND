@@ -1,1 +1,4 @@
-projects/customer_segments/.ipynb_checkpoints/*.ipynb
+# jupyter notebook
+projects/**/.ipynb_checkpoints/*.ipynb
+.ipynb_checkpoints
+.ipynb_checkpoints/*.ipynb
