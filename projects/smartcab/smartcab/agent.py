@@ -56,14 +56,14 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         
-        # NOTE : you are not allowed to engineer eatures outside of the inputs available.
+        # NOTE : you are not allowed to engineer features outside of the inputs available.
         # Because the aim of this project is to teach Reinforcement Learning, we have placed 
         # constraints in order for you to learn how to adjust epsilon and alpha, and thus learn about the balance between exploration and exploitation.
         # With the hand-engineered features, this learning process gets entirely negated.
         
-        # Set 'state' as a tuple of relevant data for the agent        
+        # Set 'state' as a tuple of relevant data for the agent
         state = None
-
+        
         return state
 
 
