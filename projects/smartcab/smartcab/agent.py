@@ -39,6 +39,12 @@ class LearningAgent(Agent):
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
+        if testing==True:
+            self.epsilon = 0
+            self.alpha = 0
+        else:
+            self.epsilon = self.epsilon - .005
+
 
         return None
 
@@ -64,6 +70,10 @@ class LearningAgent(Agent):
         # Set 'state' as a tuple of relevant data for the agent
         state = waypoint, inputs['light'], inputs['left'], inputs['oncoming']
         
+        if self.learning == True:
+            if state not in self.Q.keys():
+                self.createQ(state)
+                
         return state
 
 
@@ -77,6 +87,11 @@ class LearningAgent(Agent):
         # Calculate the maximum Q-value of all actions for a given state
 
         maxQ = None
+        if state in self.Q:
+            key, value = max(self.Q[state].iteritems(), key=lambda x:x[1])
+            maxQ = key
+        else:
+            createQ(state)
 
         return maxQ 
 
