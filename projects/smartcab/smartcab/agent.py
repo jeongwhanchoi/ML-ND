@@ -43,7 +43,7 @@ class LearningAgent(Agent):
             self.epsilon = 0
             self.alpha = 0
         else:
-            self.epsilon = self.epsilon - .005
+            self.epsilon = self.epsilon - 0.05
 
 
         return None
